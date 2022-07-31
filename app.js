@@ -6,7 +6,8 @@ console.log(holes)
 const musicPunch = new Audio ('assets/mixkit-game-ball-tap-2073.wav')
 const cursor = document.querySelector('.cursor')
 const scoreElement = document.querySelector('.score span')
-let score = 0; //guardar los puntos cada vez que se hace click
+const playBtn = document.querySelector('#playgame');
+const stopBtn = document.querySelector('#stopgame');
 
 //cambiar estilo de cursor
 window.addEventListener('mousemove', element=>{
@@ -14,11 +15,16 @@ window.addEventListener('mousemove', element=>{
     cursor.style.left = element.pageX + `px`
 })
 
+let score = 0; //guardar los puntos cada vez que se hace click
+let timeOver = 45;
+
+
 const run = () =>{
     //se movera entre las 8 posiciones del array del
     //spread operator
     const randomPos = Math.floor(Math.random() * holes.length)
     const hole = holes[randomPos];
+    
 
     //añadimos la imagen del topo
     const img = document.createElement('img')
@@ -37,23 +43,28 @@ const run = () =>{
         //cada vez que hago click remplazo la imagen del topo
         //y vuelvo a lanzar "run"
         clearTimeout(timer)
-        setTimeout(()=>{
+        timerClick = setTimeout(()=>{
             hole.removeChild(img)
             run()
-        }, 500)
+        }, 100)
     })
 
     timer = setTimeout(()=>{
         hole.removeChild(img)
         run()
-    }, 1300)
-
-    gameover = setInterval(()=>{
-        hole.removeChild(img)
-        clearTimeout(timer)
-        score = 0
-    }, 10000)
+    }, 700)
 }
 
+const countDown = () =>{
+    timeOver--
+    if (timeOver === 0) {
+        clearInterval(countDownTimer);
+        clearInterval(timer);
+        alert('Your score is ' + score)
+    }
+}
 
+let countDownTimer = setInterval(countDown, 1000)
 
+playBtn.addEventListener('click', run);
+/* stopBtn.addEventListener('click', reset); */

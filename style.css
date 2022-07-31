@@ -23,7 +23,7 @@ header{
     background-size: cover;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -72,4 +72,19 @@ h3{
     color: white;
     font-family: 'Orbitron', sans-serif;
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.449);
+}
+
+.playgame {
+    font-size: 30px;
+    margin-bottom: 44px;
+    margin-top: 68px;
+    letter-spacing: 5px;
+    border: 0;
+    background-color: rgb(67, 67, 67);
+    padding: 10px 30px 10px 30px;
+    font-weight: bold;
+}
+
+.playgame:hover{
+    background-color: green;
 }

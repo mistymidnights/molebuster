@@ -1,3 +1,5 @@
+//spread operator - se expande por 
+//lo que tenemos divs diferenciados
 const holes = [...document.querySelectorAll('.hole')]
 console.log(holes)
 
@@ -7,23 +9,24 @@ const scoreElement = document.querySelector('.score span')
 const playBtn = document.querySelector('#playgame');
 const stopBtn = document.querySelector('#stopgame');
 
-
+//cambiar estilo de cursor
 window.addEventListener('mousemove', element=>{
     cursor.style.top = element.pageY + `px`
     cursor.style.left = element.pageX + `px`
 })
 
-let score = 0; 
+let score = 0; //guardar los puntos cada vez que se hace click
 let timeOver = 30;
 
 
 const run = () =>{
-
+    //se movera entre las 8 posiciones del array del
+    //spread operator
     const randomPos = Math.floor(Math.random() * holes.length)
     const hole = holes[randomPos];
     
 
-
+    //añadimos la imagen del topo
     const img = document.createElement('img')
     img.classList.add('mole')
     img.src = 'assets/mole-png.png'
@@ -36,7 +39,9 @@ const run = () =>{
         //remplazar el score
         score += 5
         scoreElement.textContent = score
-
+        //
+        //cada vez que hago click remplazo la imagen del topo
+        //y vuelvo a lanzar "run"
         clearTimeout(timer)
         timerClick = setTimeout(()=>{
             hole.removeChild(img)
@@ -63,3 +68,4 @@ const countDown = () =>{
 let countDownTimer = setInterval(countDown, 1000)
 
 playBtn.addEventListener('click', run);
+/* stopBtn.addEventListener('click', reset); */
